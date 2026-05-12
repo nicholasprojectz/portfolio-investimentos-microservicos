@@ -1,0 +1,66 @@
+version: '3.8'
+
+services:
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: broker-rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      RABBITMQ_DEFAULT_USER: admin
+      RABBITMQ_DEFAULT_PASS: admin123
+    networks:
+      - microservices-network
+
+  db-auth:
+    image: postgres:15-alpine
+    container_name: postgres-auth
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: authuser
+      POSTGRES_PASSWORD: authpassword
+      POSTGRES_DB: authdb
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+    networks:
+      - microservices-network
+
+  db-market-data:
+    image: postgres:15-alpine
+    container_name: postgres-market-data
+    ports:
+      - "5433:5432"
+    environment:
+      POSTGRES_USER: marketuser
+      POSTGRES_PASSWORD: marketpassword
+      POSTGRES_DB: marketdb
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+    networks:
+      - microservices-network
+
+  db-user-portfolio:
+    image: postgres:15-alpine
+    container_name: postgres-user-portfolio
+    ports:
+      - "5434:5432"
+    environment:
+      POSTGRES_USER: portfoliouser
+      POSTGRES_PASSWORD: portfoliopassword
+      POSTGRES_DB: portfoliodb
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+    networks:
+      - microservices-network
+
+networks:
+  microservices-network:
+    driver: bridge
