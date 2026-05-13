@@ -1,4 +1,4 @@
-package com.portfolio.authservice.model;
+package com.portfolio.auth_service.model;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

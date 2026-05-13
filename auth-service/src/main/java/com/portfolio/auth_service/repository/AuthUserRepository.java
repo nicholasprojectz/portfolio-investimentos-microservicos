@@ -1,6 +1,6 @@
-package com.portfolio.authservice.repository;
+package com.portfolio.auth_service.repository;
 
-import com.portfolio.authservice.model.AuthUser;
+import com.portfolio.auth_service.model.AuthUser;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

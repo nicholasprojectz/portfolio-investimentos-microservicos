@@ -1,4 +1,4 @@
-package com.portfolio.authservice.dto;
+package com.portfolio.auth_service.dto;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;

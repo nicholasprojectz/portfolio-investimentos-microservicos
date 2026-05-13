@@ -1,9 +1,9 @@
-package com.portfolio.authservice.controller;
+package com.portfolio.auth_service.controller;
 
-import com.portfolio.authservice.dto.LoginRequestDTO;
-import com.portfolio.authservice.dto.RegisterRequestDTO;
-import com.portfolio.authservice.dto.TokenResponseDTO;
-import com.portfolio.authservice.service.AuthService;
+import com.portfolio.auth_service.dto.LoginRequestDTO;
+import com.portfolio.auth_service.dto.RegisterRequestDTO;
+import com.portfolio.auth_service.dto.TokenResponseDTO;
+import com.portfolio.auth_service.service.AuthService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

@@ -1,4 +1,5 @@
-package com.portfolio.authservice.service;
+package com.portfolio.auth_service.service;
+import com.portfolio.auth_service.model.AuthUser;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
@@ -23,9 +24,9 @@ public class JwtService {
         return Keys.hmacShaKeyFor(keyBytes);
     }
 
-    public String generateToken(String email) {
+    public String generateToken(AuthUser user) {
         return Jwts.builder()
-                .subject(email) // O dono do token
+                .subject(user.getEmail()) // O dono do token
                 .issuedAt(new Date(System.currentTimeMillis())) // Data de criação
                 .expiration(new Date(System.currentTimeMillis() + jwtExpiration)) // Data de expiração
                 .signWith(getSignInKey()) // Assinatura digital

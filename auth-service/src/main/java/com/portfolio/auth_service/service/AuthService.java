@@ -1,9 +1,12 @@
-package com.portfolio.authservice.service;
+package com.portfolio.auth_service.service;
 
-import com.portfolio.authservice.dto.LoginRequestDTO;
-import com.portfolio.authservice.dto.RegisterRequestDTO;
-import com.portfolio.authservice.model.AuthUser;
-import com.portfolio.authservice.repository.AuthUserRepository;
+import com.portfolio.auth_service.dto.LoginRequestDTO;
+import com.portfolio.auth_service.dto.RegisterRequestDTO;
+import com.portfolio.auth_service.model.AuthUser;
+import com.portfolio.auth_service.repository.AuthUserRepository;
+import com.portfolio.auth_service.dto.TokenResponseDTO;
+// Removi o import do JwtService pois estão no mesmo pacote.
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -11,11 +14,14 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 @Service
-@RequiredArgsConstructor
+@RequiredArgsConstructor // O Lombok vai criar o construtor com os 3 atributos "final" abaixo automaticamente
 public class AuthService {
 
     private final AuthUserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+    private final JwtService jwtService; // Faltava esta declaração. Note o 'J' maiúsculo.
+
+    // O construtor manual foi APAGADO.
 
     public void register(RegisterRequestDTO request) {
         Optional<AuthUser> existingUser = userRepository.findByEmail(request.email());
@@ -25,12 +31,12 @@ public class AuthService {
 
         AuthUser newUser = new AuthUser();
         newUser.setEmail(request.email());
-        newUser.setPassword(passwordEncoder.encode(request.password())); // Criptografa antes de salvar
+        newUser.setPassword(passwordEncoder.encode(request.password())); 
 
         userRepository.save(newUser);
     }
 
-    public void login(LoginRequestDTO request) {
+    public TokenResponseDTO login(LoginRequestDTO request) {
         AuthUser user = userRepository.findByEmail(request.email())
                 .orElseThrow(() -> new IllegalArgumentException("Email ou senha inválidos."));
 
@@ -38,6 +44,7 @@ public class AuthService {
             throw new IllegalArgumentException("Email ou senha inválidos.");
         }
 
-        // TODO: A senha está correta. O próximo passo é gerar e retornar o Token JWT.
+        String tokenGerado = jwtService.generateToken(user);
+        return new TokenResponseDTO(tokenGerado);
     }
 }

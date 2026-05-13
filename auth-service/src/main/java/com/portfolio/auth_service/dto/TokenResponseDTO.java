@@ -1,4 +1,4 @@
-package com.portfolio.authservice.dto;
+package com.portfolio.auth_service.dto;
 
 public record TokenResponseDTO(
     String token
