@@ -1,0 +1,17 @@
+server:
+  port: 8080 # O Gateway será a nossa porta principal de entrada
+
+spring:
+  application:
+    name: api-gateway
+  cloud:
+    gateway:
+      routes:
+        # Rota para o seu Auth Service
+        - id: auth-service
+          uri: http://localhost:8081 # O endereço de onde o auth-service está rodando
+          predicates:
+            - Path=/auth/** # Qualquer requisição que comece com /auth/ cai aqui
+
+jwt:
+  secret: ${JWT_SECRET} # Vai puxar da mesma variável de ambiente no terminal
