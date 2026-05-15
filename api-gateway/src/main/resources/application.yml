@@ -1,5 +1,5 @@
 server:
-  port: 8080 # O Gateway será a nossa porta principal de entrada
+  port: 8080
 
 spring:
   application:
@@ -7,11 +7,17 @@ spring:
   cloud:
     gateway:
       routes:
-        # Rota para o seu Auth Service
+        # Rota 1: Auth Service
         - id: auth-service
-          uri: http://localhost:8081 # O endereço de onde o auth-service está rodando
+          uri: http://localhost:8081
           predicates:
-            - Path=/auth/** # Qualquer requisição que comece com /auth/ cai aqui
+            - Path=/auth/**
+
+        # Rota 2: O futuro Portfolio Service (Vamos apontar para a porta 8082)
+        - id: portfolio-service
+          uri: http://localhost:8082
+          predicates:
+            - Path=/api/portfolio/**
 
 jwt:
-  secret: ${JWT_SECRET} # Vai puxar da mesma variável de ambiente no terminal
+  secret: ${JWT_SECRET}
