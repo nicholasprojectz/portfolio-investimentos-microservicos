@@ -12,7 +12,6 @@ public class ApiGatewayApplication {
         SpringApplication.run(ApiGatewayApplication.class, args);
     }
 
-    // IGNORANDO O YAML: Esta classe força o Spring a criar a rota na memória.
     @Bean
     public RouteLocator customRouteLocator(RouteLocatorBuilder builder) {
         return builder.routes()

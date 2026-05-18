@@ -1,0 +1,20 @@
+server:
+  port: 8082
+
+spring:
+  application:
+    name: user-portfolio-service
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/portfolio_db
+    username: admin
+    password: password
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update # O Spring vai ler suas classes e criar as tabelas automaticamente
+    show-sql: true # Mostra os comandos SQL no terminal (excelente para debugar)
+    properties:
+      hibernate:
+        format_sql: true

@@ -14,12 +14,12 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 @Service
-@RequiredArgsConstructor // O Lombok vai criar o construtor com os 3 atributos "final" abaixo automaticamente
+@RequiredArgsConstructor 
 public class AuthService {
 
     private final AuthUserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
-    private final JwtService jwtService; // Faltava esta declaração. Note o 'J' maiúsculo.
+    private final JwtService jwtService; 
 
     // O construtor manual foi APAGADO.
 

@@ -18,8 +18,6 @@ public class JwtUtil {
         return Keys.hmacShaKeyFor(keyBytes);
     }
 
-    // Método focado puramente em checar se a matemática da assinatura bate
-    // e se o prazo de validade não expirou.
     public void validateToken(final String token) {
         Jwts.parser()
                 .verifyWith(getSignInKey())

@@ -12,11 +12,10 @@ import java.util.Date;
 @Service
 public class JwtService {
 
-    // Chave secreta convertida em Base64. Em produção, isso JAMAIS fica no código, fica em variáveis de ambiente.
     @Value("${jwt.secret}")
     private String secretKey;
 
-    @Value("${jwt.expiration:86400000}") // 1 dia em milissegundos
+    @Value("${jwt.expiration:86400000}") 
     private long jwtExpiration;
 
     private SecretKey getSignInKey() {
@@ -26,10 +25,10 @@ public class JwtService {
 
     public String generateToken(AuthUser user) {
         return Jwts.builder()
-                .subject(user.getEmail()) // O dono do token
-                .issuedAt(new Date(System.currentTimeMillis())) // Data de criação
-                .expiration(new Date(System.currentTimeMillis() + jwtExpiration)) // Data de expiração
-                .signWith(getSignInKey()) // Assinatura digital
+                .subject(user.getEmail()) 
+                .issuedAt(new Date(System.currentTimeMillis())) 
+                .expiration(new Date(System.currentTimeMillis() + jwtExpiration)) 
+                .signWith(getSignInKey()) 
                 .compact();
     }
 }
