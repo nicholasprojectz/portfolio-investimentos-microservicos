@@ -5,16 +5,24 @@ spring:
   application:
     name: user-portfolio-service
 
+  # 1. Configuração do Banco de Dados
   datasource:
-    url: jdbc:postgresql://localhost:5432/portfolio_db
-    username: admin
-    password: password
+    url: jdbc:postgresql://localhost:5434/portfoliodb
+    username: portfoliouser
+    password: portfoliopassword
     driver-class-name: org.postgresql.Driver
 
   jpa:
     hibernate:
-      ddl-auto: update # O Spring vai ler suas classes e criar as tabelas automaticamente
-    show-sql: true # Mostra os comandos SQL no terminal (excelente para debugar)
+      ddl-auto: update
+    show-sql: true
     properties:
       hibernate:
         format_sql: true
+
+  # 2. Configuração da Mensageria Assíncrona
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: admin
+    password: admin123
