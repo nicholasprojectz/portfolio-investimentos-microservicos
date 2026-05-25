@@ -1,46 +1,20 @@
 package com.portfolio.user_portfolio_service.service;
 
 import com.portfolio.user_portfolio_service.dto.CarteiraRequestDTO;
-import com.portfolio.user_portfolio_service.dto.CarteiraResponseDTO;
-import com.portfolio.user_portfolio_service.model.Carteira;
-import com.portfolio.user_portfolio_service.repository.CarteiraRepository;
+import com.portfolio.user_portfolio_service.repository.AtivoRepository;
 import org.springframework.stereotype.Service;
-
-import java.time.LocalDateTime;
-import java.util.List;
 
 @Service
 public class CarteiraService {
 
-    private final CarteiraRepository carteiraRepository;
+    private final AtivoRepository ativoRepository;
 
-    public CarteiraService(CarteiraRepository carteiraRepository) {
-        this.carteiraRepository = carteiraRepository;
+    public CarteiraService(AtivoRepository ativoRepository) {
+        this.ativoRepository = ativoRepository;
     }
 
-    public CarteiraResponseDTO criarCarteira(Long usuarioId, CarteiraRequestDTO dto) {
-        Carteira carteira = new Carteira();
-        carteira.setUsuarioId(usuarioId);
-        carteira.setNome(dto.nome());
-        carteira.setDataCriacao(LocalDateTime.now()); // O sistema define a data
-
-        Carteira carteiraSalva = carteiraRepository.save(carteira);
-
-        return new CarteiraResponseDTO(
-                carteiraSalva.getId(),
-                carteiraSalva.getNome(),
-                carteiraSalva.getDataCriacao()
-        );
-    }
-
-    public List<CarteiraResponseDTO> listarCarteirasDoUsuario(Long usuarioId) {
-        return carteiraRepository.findByUsuarioId(usuarioId)
-                .stream()
-                .map(carteira -> new CarteiraResponseDTO(
-                        carteira.getId(),
-                        carteira.getNome(),
-                        carteira.getDataCriacao()
-                ))
-                .toList();
+    public void criarCarteira(Long usuarioId, CarteiraRequestDTO dto) {
+        System.out.println("Criando carteira " + dto.nome() + " para o usuario ID: " + usuarioId);
+        // Lógica futura de salvamento no banco
     }
 }

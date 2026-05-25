@@ -11,6 +11,7 @@ import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import java.math.BigDecimal;
 
 @Entity
 @Table(name = "tb_ativos")
@@ -32,4 +33,8 @@ public class Ativo {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private TipoAtivo tipo;
+
+    private Integer quantidade;
+    private BigDecimal precoMedio;
+
 }

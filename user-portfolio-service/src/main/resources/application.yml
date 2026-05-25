@@ -4,6 +4,9 @@ server:
 spring:
   application:
     name: user-portfolio-service
+  cloud:
+    discovery:
+      enabled: false
 
   # 1. Configuração do Banco de Dados
   datasource:

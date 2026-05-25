@@ -1,0 +1,20 @@
+server:
+  port: 8083
+
+spring:
+  application:
+    name: market-data-service
+
+  datasource:
+    url: jdbc:postgresql://localhost:5433/marketdb
+    username: marketuser
+    password: marketpassword
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true

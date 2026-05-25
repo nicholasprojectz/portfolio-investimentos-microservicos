@@ -4,6 +4,7 @@ import com.portfolio.user_portfolio_service.dto.PosicaoResponseDTO;
 import com.portfolio.user_portfolio_service.service.PosicaoService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import com.portfolio.user_portfolio_service.dto.PosicaoAtualizadaDTO;
 
 import java.util.List;
 
@@ -21,5 +22,15 @@ public class PosicaoController {
     @GetMapping("/carteira/{carteiraId}")
     public ResponseEntity<List<PosicaoResponseDTO>> listarPosicoes(@PathVariable Long carteiraId) {
         return ResponseEntity.ok(posicaoService.listarPosicoes(carteiraId));
+    }
+
+    @GetMapping("/{posicaoId}/rentabilidade")
+    public ResponseEntity<PosicaoAtualizadaDTO> verRentabilidade(@PathVariable Long posicaoId) {
+        return ResponseEntity.ok(posicaoService.calcularRentabilidade(posicaoId));
+    }
+
+    @GetMapping("/carteira/{carteiraId}/consolidado")
+    public ResponseEntity<com.portfolio.user_portfolio_service.dto.CarteiraConsolidadaDTO> verConsolidadoCarteira(@PathVariable Long carteiraId) {
+        return ResponseEntity.ok(posicaoService.calcularRentabilidadeCarteira(carteiraId));
     }
 }
